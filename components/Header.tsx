@@ -1,48 +1,51 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import React from "react";
+import { cn } from "@/lib/utils";
+import { SearchModal } from "./SearchModal";
 
-const Header = () => {
-	const pathname = usePathname();
-	return (
-		<header>
-			<div className="main-container inner">
-				<Link href={"/"} className="md:mb-4">
-					<Image
-						src={"/assets/logo.png"}
-						alt="Coin Flux logo"
-						width={132}
-						height={40}
-						style={{ width: "auto", height: "auto" }}
-						priority
-					/>
-				</Link>
+const Header = ({ trendingCoins = [] }: HeaderProps) => {
+  const pathname = usePathname();
 
-				<nav className="md:mb-4">
-					<Link
-						href={"/"}
-						className={cn("nav-link", {
-							"is-active": pathname === "/",
-							"is-home": true,
-						})}>
-						Home
-					</Link>
-					<p>Search Modal</p>
-					<Link
-						href={"/coins"}
-						className={cn("nav-link", {
-							"is-active": pathname === "/coins",
-						})}>
-						All Coins
-					</Link>
-				</nav>
-			</div>
-		</header>
-	);
+  return (
+    <header>
+      <div className="main-container inner">
+        <Link href="/" className="md:mb-4">
+          <Image
+            src="/assets/logo.png"
+            alt="Coin Flux logo"
+            width={132}
+            height={40}
+          />
+        </Link>
+
+        <nav className="md:mb-4">
+          <Link
+            href="/"
+            className={cn("nav-link", {
+              "is-active": pathname === "/",
+              "is-home": true,
+            })}
+          >
+            Home
+          </Link>
+
+          <SearchModal initialTrendingCoins={trendingCoins} />
+
+          <Link
+            href="/coins"
+            className={cn("nav-link", {
+              "is-active": pathname === "/coins",
+            })}
+          >
+            All Coins
+          </Link>
+        </nav>
+      </div>
+    </header>
+  );
 };
 
 export default Header;

@@ -6,10 +6,10 @@ import { TrendingDown, TrendingUp } from "lucide-react";
 import { CategoriesFallback } from "./fallback";
 
 const Categories = async () => {
-	try {
-		const categories = await fetcher<Category[]>("/coins/categories");
+  try {
+    const categories = await fetcher<Category[]>("/coins/categories");
 
-		const columns: DataTableColumn<Category>[] = [
+    const columns: DataTableColumn<Category>[] = [
       {
         header: "Category",
         cellClassName: "category-cell",
@@ -68,22 +68,22 @@ const Categories = async () => {
       },
     ];
 
-		return (
-			<div id="categories" className="custom-scrollbar">
-				<h4>Top Categories</h4>
+    return (
+      <div id="categories" className="custom-scrollbar">
+        <h4>Top Categories</h4>
 
-				<DataTable
-					columns={columns}
-					data={categories?.slice(0, 10)}
-					rowKey={(_, index) => index}
-					tableClassName="mt-3"
-				/>
-			</div>
-		);
-	} catch (error) {
-		console.error("Error fetching categories:", error);
-		return <CategoriesFallback />;
-	}
+        <DataTable
+          columns={columns}
+          data={categories?.slice(0, 10)}
+          rowKey={(_, index) => index}
+          tableClassName="mt-3"
+        />
+      </div>
+    );
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    return <CategoriesFallback />;
+  }
 };
 
 export default Categories;

@@ -17,6 +17,8 @@ const Header = () => {
 						alt="Coin Flux logo"
 						width={132}
 						height={40}
+						style={{ width: "auto", height: "auto" }}
+						priority
 					/>
 				</Link>
 
